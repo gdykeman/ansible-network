@@ -1,0 +1,23 @@
+---
+- name: build system configuration
+  template:
+    src: "{{ device_os }}/system.j2"
+    dest: "{{ config_root }}/00-system.cfg"
+
+#- name: build loopback interface configuration
+#  template:
+#    src: "{{ device_os }}/loopback.j2"
+#    dest: "{{ config_root }}/10-loopback.cfg"
+#
+#- name: build ethernet interface configuration
+#  template:
+#    src: "{{ device_os }}/ethernet.j2"
+#    dest: "{{ config_root }}/10-ethernet.cfg"
+#
+#- name: build ospf configuration
+#  template:
+#    src: "{{ device_os }}/ospf.j2"
+#    dest: "{{ config_root }}/40-ospf.cfg"
+#
+#
+

@@ -1,0 +1,32 @@
+---
+- name: set deploy_root fact
+  set_fact:
+    deploy_root: "{{ playbook_dir }}/configs"
+
+- name: remove deploy_root
+  file:
+    path: "{{ deploy_root }}"
+    state: absent
+  when: clean | bool
+  run_once: yes
+
+- name: create deploy_root
+  file:
+    path: "{{ deploy_root }}"
+    state: directory
+  run_once: yes
+
+- name: assemble configuration for device
+  assemble:
+    src: "{{ config_root }}"
+    dest: "{{ deploy_root }}/{{ inventory_hostname }}.cfg"
+  register: config_file
+
+- name: set config file facts
+  set_fact:
+    config_file: "{{ config_file.dest }}"
+    config_updated: "{{ config_file.changed }}"
+
+
+
+

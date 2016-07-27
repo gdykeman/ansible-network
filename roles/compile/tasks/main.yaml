@@ -1,0 +1,27 @@
+---
+- debug: msg="start compile for template {{ template }}"
+
+- name: check for template fact
+  fail: msg='template fact must be defined'
+  when: template is not defined
+
+- name: explicitly include any vars
+  include_vars: "{{ item }}"
+  with_items: "{{ template_vars }}"
+  when: template_vars is defined
+
+- name: set template_root
+  set_fact:
+    template_root: "{{ template }}"
+  when: not template_root
+
+- name: build configuration
+  template:
+    src: "{{ template_root }}/{{ device_os }}.j2"
+    dest: "{{ config_root }}/{{ load_order | default('99') }}-{{ template }}.cfg"
+
+- name: unset template_root
+  set_fact:
+    template_root: null
+
+- debug: msg="finished compile for template {{ template }}"

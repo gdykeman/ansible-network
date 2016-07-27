@@ -1,0 +1,7 @@
+{% for item in links %}
+interface {{ item.interface }}
+  description configured by Ansible
+  ip address {{ item.ipv4 }}/{{ item.mask }}
+
+{% endfor %}
+

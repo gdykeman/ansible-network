@@ -1,0 +1,20 @@
+---
+- name: import links definition
+  include_vars: links.yaml
+
+#- name: create host build directories
+#  file:
+#    path: "{{ build_root }}/{{ item.1.host }}"
+#    state: directory
+#  with_subelements:
+#    - "{{ links }}"
+#    - attachments
+
+- name: build interface configuration
+  template:
+    src: "{{ hostvars[item.1.host].device_os }}.j2"
+    dest: "{{ build_root }}/{{ item.1.host }}/{{ item.0.name }}.cfg"
+  with_subelements:
+    - "{{ links }}"
+    - attachments
+

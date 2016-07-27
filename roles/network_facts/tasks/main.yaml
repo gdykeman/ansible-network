@@ -1,0 +1,5 @@
+---
+- name: "include {{ device_os }} tasks"
+  include: "{{ device_os }}.yaml"
+  when: not skip_facts
+

@@ -1,0 +1,13 @@
+hostname {{ inventory_hostname }}
+
+ip domain name eng.ansible.com
+ip name-server 172.26.1.1
+
+lldp run
+
+interface GigabitEthernet0/0
+ no lldp transmit
+ no lldp receive
+
+
+

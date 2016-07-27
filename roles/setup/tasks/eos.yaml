@@ -1,0 +1,9 @@
+---
+- name: configure eapi
+  eos_config:
+    lines:
+      - protocol http
+      - no shutdown
+    parents: management api http-commands
+    provider: "{{ cli }}"
+

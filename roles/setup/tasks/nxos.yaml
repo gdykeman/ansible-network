@@ -1,0 +1,7 @@
+---
+- name: configure nxapi
+  nxos_config:
+    lines:
+      - feature nxapi
+    provider: "{{ cli }}"
+

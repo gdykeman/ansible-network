@@ -1,0 +1,6 @@
+---
+- name: push configuration to ios devices
+  ios_template:
+    src: "configs/{{ inventory_hostname }}.cfg"
+    provider: "{{ provider }}"
+

@@ -1,0 +1,7 @@
+---
+- name: include vars
+  include_vars: "{{ definition }}"
+
+- name: include device specific tasks
+  include: "{{ device_os }}.yaml"
+

@@ -1,0 +1,8 @@
+---
+- name: perform node setup activies
+  include: "{{ device_os }}.yaml"
+  with_first_found:
+    - files: "{{ device_os }}.yaml"
+      paths: "{{ role_path }}/tasks"
+      skip: true
+

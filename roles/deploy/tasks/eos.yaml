@@ -1,0 +1,6 @@
+---
+- name: push configuration to eos devices
+  eos_template:
+    src: "{{ config_file | default(default_src) }}"
+    provider: "{{ eapi }}"
+

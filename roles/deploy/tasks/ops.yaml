@@ -1,0 +1,6 @@
+---
+- name: push configuration to ops devices
+  ops_template:
+    src: "{{ config_file | default(default_src) }}"
+    provider: "{{ provider }}"
+

@@ -1,0 +1,6 @@
+- name: build device configuration files
+  hosts: all
+
+  roles:
+    - backup
+

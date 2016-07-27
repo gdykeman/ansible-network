@@ -1,0 +1,9 @@
+feature ospf
+
+router ospf {{ ospf.instance }}
+  router-id {{ ospf.router_id }}
+{% for item in ospf.networks %}
+  network {{ item.network }}/{{ item.wildcard }} area {{ item.area }}
+{% endfor %}
+
+

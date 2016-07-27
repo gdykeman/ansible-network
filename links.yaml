@@ -1,0 +1,8 @@
+---
+- name: create build environment
+  hosts: all
+
+  roles:
+    - build
+    - { role: links, run_once: yes }
+

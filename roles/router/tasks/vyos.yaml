@@ -1,0 +1,14 @@
+---
+- name: build system configuration
+  template:
+    src: "{{ device_os }}/system.j2"
+    dest: "{{ config_root }}/00-system.cfg"
+
+- name: build ethernet interface configuration
+  template:
+    src: "{{ device_os }}/ethernet.j2"
+    dest: "{{ config_root }}/10-ethernet-{{ item.name }}.cfg"
+  with_items: "{{ interfaces }}"
+
+
+
