@@ -1,0 +1,10 @@
+*.bak
+ansible.cfg
+hosts
+
+group_vars/
+backup/
+build/
+configs/
+
+
