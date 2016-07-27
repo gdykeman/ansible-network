@@ -1,0 +1,19 @@
+---
+- name: enable eapi on arista eos nodes
+  hosts: eos
+
+  tasks:
+    - name: enable eapi http
+      eos_config:
+        lines:
+          - protocol http
+          - no shutdown
+        parents: management api http-commands
+        provider: "{{ cli }}"
+
+    - name: verify eapi status
+      eos_command:
+        commands: show management api http-commands
+        waitfor: result[0] contains 'HTTP server:        running, set to use port 80'
+        provider: "{{ cli }}"
+
