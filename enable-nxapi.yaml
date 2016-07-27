@@ -1,0 +1,17 @@
+---
+- name: enable nxapi on cisco nxos hosts
+  hosts: nxos
+
+  tasks:
+    - name: configure nxapi support
+      nxos_config:
+        lines:
+          - feature nxapi
+        provider: "{{ cli }}"
+
+    - name: verify nxapi status
+      nxos_command:
+        commands: show nxapi
+        waitfor: result[0] contains 'HTTP Port:    80'
+        provider: "{{ cli }}"
+
