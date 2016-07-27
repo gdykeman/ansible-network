@@ -1,0 +1,11 @@
+---
+- name: check cisco ios running version
+  hosts: ios
+
+  tasks:
+    - name: collect and validate version
+      ios_command:
+        commands: show version
+        waitfor: result[0] contains 'Version 15.6(1)T'
+        provider: "{{ cli }}"
+
