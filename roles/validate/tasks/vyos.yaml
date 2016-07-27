@@ -1,0 +1,6 @@
+---
+- name: push configuration to vyos devices
+  vyos_config:
+    src: "configs/{{ inventory_hostname }}.cfg"
+    provider: "{{ provider }}"
+

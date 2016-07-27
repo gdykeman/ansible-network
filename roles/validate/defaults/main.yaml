@@ -1,0 +1,2 @@
+---
+default_src: "configs/{{ inventory_hostname }}.cfg"

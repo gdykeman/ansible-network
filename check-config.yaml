@@ -1,0 +1,7 @@
+---
+- name: check system configuration
+  hosts: eos,ops,nxos,ios
+
+  roles:
+    - validate
+

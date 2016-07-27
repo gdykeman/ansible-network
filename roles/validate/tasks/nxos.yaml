@@ -1,0 +1,6 @@
+---
+- name: push configuration to nxos devices
+  nxos_template:
+    src: "{{ playbook_dir }}/configs/{{ inventory_hostname }}.cfg"
+    provider: "{{ nxapi }}"
+

@@ -1,0 +1,6 @@
+---
+- name: push configuration to ops devices
+  ops_template:
+    src: "{{ playbook_dir }}/configs/{{ inventory_hostname }}.cfg"
+    provider: "{{ provider }}"
+
