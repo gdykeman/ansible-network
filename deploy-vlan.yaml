@@ -1,0 +1,78 @@
+- name: build device configuration files
+  hosts: all
+
+  pre_tasks:
+    - name: check for device_os fact
+      fail: msg='device_os fact must be set'
+      when: device_os is not defined
+      tags:
+        - build
+        - deploy
+        - backup
+
+  roles:
+      # setup build environment
+      # optional params:
+      #   clean: [yes, no*]
+      #
+    - name: setup build environment
+      role: build
+
+      tags:
+        - build
+
+      # template out system configuration
+      #
+      # required params:
+      #   template: <str>
+      #
+      # optional params:
+      #   load_order: <int, str>
+      #   template_vars: <list>
+      #   template_root: <str>
+      #
+    - name: compile configuration fragments
+      role: compile
+
+      template: vlan
+      vlan_id: "{{ vlan_id }}"
+
+      tags:
+        - build
+
+      # assemble config fragments into loadable file
+      # final configuration files stored in {{ playbook_dir }}/configs
+      #
+    - name: assemble fragments into final loadable configuration
+      role: assemble
+
+      tags:
+        - build
+
+
+      # perform any tasks prior to pushing out the configuration
+      # such as enabling APIs
+      #
+    - name: handle pre deployment tasks for device
+      role: setup
+
+      tags:
+        - deploy
+
+      # backup the current device configuration
+      # backup configs are stored in {{ playbook_dir }}/backups
+      #
+    - name: backup existing device configuration
+      role: backup
+
+      tags:
+        - backup
+
+      # push the configuration file to the device
+      #
+    - name: load the configuration file onto the device
+      role: deploy
+
+      tags:
+        - deploy
+
