@@ -1,0 +1,28 @@
+---
+- name: set default build folder
+  set_fact:
+    build_root: "{{ playbook_dir }}/build"
+    config_root: "{{ playbook_dir }}/build/{{ inventory_hostname }}"
+
+- name: remove build directory
+  file:
+    path: "{{ build_root }}"
+    state: absent
+  when: clean | bool
+  run_once: yes
+  delegate_to: localhost
+
+- name: create build_root
+  file:
+    path: "{{ build_root }}"
+    state: directory
+  run_once: yes
+  delegate_to: localhost
+
+- name: create config_root directory
+  file:
+    path: "{{ config_root }}"
+    state: directory
+  delegate_to: localhost
+
+
