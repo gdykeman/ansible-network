@@ -1,0 +1,7 @@
+---
+- name: run command and return output
+  nxos_command:
+    commands: "{{ commands }}"
+    provider: "{{ cli }}"
+  register: results
+

@@ -1,0 +1,8 @@
+---
+- name: run ad hoc commands on network devices
+  hosts: all
+
+  roles:
+    - role: commands
+      commands: "{{ commands }}"
+

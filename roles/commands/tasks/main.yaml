@@ -1,0 +1,7 @@
+---
+- name: verify device_os fact is set
+  fail: msg='device_os is required'
+  when: device_os is not defined
+
+- name: include device specific tasks
+  include: "{{ device_os }}.yaml"
