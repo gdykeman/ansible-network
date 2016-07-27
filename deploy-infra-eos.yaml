@@ -1,0 +1,11 @@
+---
+- name: deploy infrastructure configuration
+  hosts: eos
+
+  tasks:
+    - name: configure infrastructure interfaces
+      eos_template:
+        src: "{{ playbook_dir }}/infra/{{ inventory_hostname }}.cfg"
+        include_defaults: yes
+        provider: "{{ eapi }}"
+
