@@ -35,6 +35,9 @@
       role: compile
 
       template: snmp
+      snmp_contact: network operations
+      snmp_location: data center
+
 
       tags:
         - build
