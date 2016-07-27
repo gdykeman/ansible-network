@@ -1,0 +1,18 @@
+---
+- name: collect all files from /etc/quagga
+  find:
+    paths: /etc/quagga
+    pattern: "*.conf"
+  register: quagga_files
+
+- name: set quagga_items_
+  set_fact: quagga_items="{{ quagga_files.files | map(attribute='path') | list }}"
+
+- name: backup config files from cumulus devices
+  fetch:
+    src: "{{ item }}"
+    dest: "{{ backup_path }}"
+  with_items: "{{ quagga_items }}"
+
+- name: display backup_path
+  debug: var=backup_path
