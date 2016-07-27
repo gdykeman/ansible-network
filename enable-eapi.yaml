@@ -13,7 +13,7 @@
 
     - name: verify eapi status
       eos_command:
-        commands: show management api http-commands
-        waitfor: result[0] contains 'HTTP server:        running, set to use port 80'
+        commands: show management api http-commands | json
+        waitfor: result[0].httpServer.running eq true
         provider: "{{ cli }}"
 
