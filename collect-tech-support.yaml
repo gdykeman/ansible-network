@@ -1,0 +1,12 @@
+---
+- name: collect tech support
+  hosts: ios02
+
+  tasks:
+    - name: run show tech-support
+      ios_command:
+        commands: show tech-support
+        provider: "{{ cli }}"
+      register: result
+
+    - debug: var=result.stdout_lines[0]
