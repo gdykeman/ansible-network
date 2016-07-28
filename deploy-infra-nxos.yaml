@@ -1,0 +1,10 @@
+---
+- name: deploy infrastructure configuration
+  hosts: nxos
+
+  tasks:
+    - name: configure infrastructure interfaces
+      nxos_template:
+        src: "{{ playbook_dir }}/infra/{{ inventory_hostname }}.cfg"
+        provider: "{{ nxapi }}"
+
